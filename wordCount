@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+
+int countWords(const char *str) {
+    int count = 0;
+    bool inWord = false;
+
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] == ' ' || str[i] == '\n' || str[i] == '\t') {
+            if (inWord) {
+                count++;
+                inWord = false;
+            }
+        } else 
+        {
+            inWord = true;
+        }
+    }
+
+    
+    if (inWord) {
+        count++;
+    }
+
+    return count;
+}
+
+int main() {
+    char text[1000];
+
+    printf("Enter a string: \n");
+    fgets(text, sizeof(text), stdin);
+
+    int words = countWords(text);
+    printf("\nWord count: %d\n", words);
+
+    return 0;
+}
